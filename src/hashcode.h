@@ -10,11 +10,17 @@ class Hashcode {
 	public:
 		Hashcode();
 		~Hashcode();
+		void calculate();
 	private:
-		unsigned int maximumSlidesAmount;
-		unsigned int pizzaAmount;
-		unsigned int* slices;
-	// friend std::ifstream& operator>>(std::ifstream&, Hashcode&);
+		// input
+			unsigned int maximumSliceAmount;
+			unsigned int pizzaAmount;
+			unsigned int* slices;
+		// output
+			unsigned int resultPizzaAmount;
+			unsigned int* resultSlices;
+	friend std::istream& operator>>(std::istream&, Hashcode&);
+	friend std::ostream& operator<<(std::ostream&, Hashcode&);
 };
 
 #endif
