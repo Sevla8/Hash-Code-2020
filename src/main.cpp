@@ -39,7 +39,7 @@ int main(int argc, const char** argv) {
 
 	inputFile >> hashcode;
 
-	// hashcode.calculate();
+	hashcode.calculate();
 
 	outputFile << hashcode;
 

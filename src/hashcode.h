@@ -3,14 +3,14 @@
 
 #include <istream>
 #include <fstream>
-// #include <assert.h>
-// #include <math.h>
+#include <iostream>
 
 class Hashcode {
 	public:
 		Hashcode();
 		~Hashcode();
 		void calculate();
+		void calculate(unsigned int&, bool*&);
 	private:
 		// input
 			unsigned int maximumSliceAmount;
@@ -18,7 +18,9 @@ class Hashcode {
 			unsigned int* slices;
 		// output
 			unsigned int resultPizzaAmount;
-			unsigned int* resultSlices;
+			bool* selectedPizza;
+		// tempory
+			unsigned int sliceAmount;
 	friend std::istream& operator>>(std::istream&, Hashcode&);
 	friend std::ostream& operator<<(std::ostream&, Hashcode&);
 };
