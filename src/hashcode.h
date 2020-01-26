@@ -13,14 +13,14 @@ class Hashcode {
 		void calculate(unsigned int&, bool*&);
 	private:
 		// input
-			unsigned int maximumSliceAmount;
-			unsigned int pizzaAmount;
+			unsigned int nbSliceMax;
+			unsigned int nbPizza;
 			unsigned int* slices;
 		// output
-			unsigned int resultPizzaAmount;
-			bool* selectedPizza;
+			unsigned int nbSelectedPizza;
+			bool* selected;
 		// tempory
-			unsigned int sliceAmount;
+			unsigned int nbSlice;
 	friend std::istream& operator>>(std::istream&, Hashcode&);
 	friend std::ostream& operator<<(std::ostream&, Hashcode&);
 };
