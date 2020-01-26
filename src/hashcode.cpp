@@ -5,56 +5,57 @@ Hashcode::Hashcode() {}
 Hashcode::~Hashcode() {}
 
 void Hashcode::calculate() {
-	this->resultPizzaAmount = 0;
-	this->sliceAmount = 0;
-	for (unsigned int it = 0; it < this->pizzaAmount; ++it) {
-		unsigned int sliceAmount = this->slices[it];
-		bool* selectedPizza = new bool[pizzaAmount];
-		for (unsigned int i = 0; i < pizzaAmount; i += 1) {
-			selectedPizza[i] = false;
+	this->nbSelectedPizza = 0;
+	this->nbSlice = 0;
+
+	for (unsigned int it = 0; it < this->nbPizza; ++it) {
+		unsigned int nbSliceTmp = this->slices[it];
+		bool* selectedTmp = new bool[this->nbPizza];
+		for (unsigned int i = 0; i < this->nbPizza; i += 1) {
+			selectedTmp[i] = false;
 		}
-		selectedPizza[it] = true;
+		selectedTmp[it] = true;
 
-		this->calculate(sliceAmount, selectedPizza);
+		this->calculate(nbSliceTmp, selectedTmp);
 
-		if (sliceAmount > this->sliceAmount && sliceAmount <= this->maximumSliceAmount) {
-			this->sliceAmount = sliceAmount;
-			for (unsigned int i = 0; i < this->pizzaAmount; i += 1) {
-				this->selectedPizza[i] = selectedPizza[i];
+		if (nbSliceTmp > this->nbSlice && nbSliceTmp <= this->nbSliceMax) {
+			this->nbSlice = nbSliceTmp;
+			for (unsigned int i = 0; i < this->nbPizza; i += 1) {
+				this->selected[i] = selectedTmp[i];
 			}
 		}
 
-		delete[] selectedPizza;
+		delete[] selectedTmp;
 
 	}
 
-	for (unsigned int i = 0; i < this->pizzaAmount; i += 1) {
-		if (this->selectedPizza[i]) this->resultPizzaAmount += 1;
+	for (unsigned int i = 0; i < this->nbPizza; i += 1) {
+		if (this->selected[i]) this->nbSelectedPizza += 1;
 	}
 }
 
-void Hashcode::calculate(unsigned int& sliceAmount, bool*& selectedPizza) {
-	if (sliceAmount < this->maximumSliceAmount) {
-		for (unsigned int it = 0; it < this->pizzaAmount; ++it) {
-			if (selectedPizza[it] == false) {
+void Hashcode::calculate(unsigned int& nbSliceTmp, bool*& selectedTmp) {
+	if (nbSliceTmp < this->nbSliceMax) {
+		for (unsigned int it = 0; it < this->nbPizza; ++it) {
+			if (selectedTmp[it] == false) {
 
-				unsigned int sliceAmount0 = sliceAmount + this->slices[it];
-				bool* selectedPizza0 = new bool[pizzaAmount];
-				for (unsigned int i = 0; i < this->pizzaAmount; i += 1) {
-					selectedPizza0[i] = selectedPizza[i];
+				unsigned int nbSliceTmp2 = nbSliceTmp + this->slices[it];
+				bool* selectedTmp2 = new bool[this->nbPizza];
+				for (unsigned int i = 0; i < this->nbPizza; i += 1) {
+					selectedTmp2[i] = selectedTmp[i];
 				}
-				selectedPizza0[it] = true;
+				selectedTmp2[it] = true;
 
-				if (sliceAmount0 > this->sliceAmount && sliceAmount0 <= this->maximumSliceAmount) {
-					this->sliceAmount = sliceAmount0;
-					for (unsigned int i = 0; i < this->pizzaAmount; i += 1) {
-						this->selectedPizza[i] = selectedPizza0[i];
+				if (nbSliceTmp2 > this->nbSlice && nbSliceTmp2 <= this->nbSliceMax) {
+					this->nbSlice = nbSliceTmp2;
+					for (unsigned int i = 0; i < this->nbPizza; i += 1) {
+						this->selected[i] = selectedTmp2[i];
 					}
 				}
 
-				this->calculate(sliceAmount0, selectedPizza0);
+				this->calculate(nbSliceTmp2, selectedTmp2);
 
-				delete[] selectedPizza0;
+				delete[] selectedTmp2;
 
 			}
 		}
@@ -62,13 +63,13 @@ void Hashcode::calculate(unsigned int& sliceAmount, bool*& selectedPizza) {
 }
 
 std::istream& operator>>(std::istream& is, Hashcode& ha) {
-	is >> ha.maximumSliceAmount;
-	is >> ha.pizzaAmount;
+	is >> ha.nbSliceMax;
+	is >> ha.nbPizza;
 
-	ha.slices = new unsigned int[ha.pizzaAmount];
-	ha.selectedPizza = new bool[ha.pizzaAmount];
+	ha.slices = new unsigned int[ha.nbPizza];
+	ha.selected = new bool[ha.nbPizza];
 
-	for (unsigned int it = 0; it < ha.pizzaAmount; ++it) {
+	for (unsigned int it = 0; it < ha.nbPizza; ++it) {
 		is >> ha.slices[it];
 	}
 
@@ -76,10 +77,10 @@ std::istream& operator>>(std::istream& is, Hashcode& ha) {
 }
 
 std::ostream& operator<<(std::ostream& os, Hashcode& ha) {
-	os << ha.resultPizzaAmount << std::endl;
+	os << ha.nbSelectedPizza << std::endl;
 
-	for (unsigned int it = 0; it < ha.pizzaAmount; ++it) {
-		if (ha.selectedPizza[it]) {
+	for (unsigned int it = 0; it < ha.nbPizza; ++it) {
+		if (ha.selected[it]) {
 			os << it << ' ';
 		}
 	}
@@ -87,7 +88,7 @@ std::ostream& operator<<(std::ostream& os, Hashcode& ha) {
 	os << std::endl;
 
 	delete[] ha.slices;
-	delete[] ha.selectedPizza;
+	delete[] ha.selected;
 
 	return os;
 }
