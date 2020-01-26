@@ -7,4 +7,4 @@ make
 
 ## Execution
 
-./hashcode tests/input/<filetest>
+./hashcode tests/input/\<filetest\>
