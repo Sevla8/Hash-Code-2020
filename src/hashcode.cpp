@@ -8,21 +8,33 @@ void Hashcode::calculate() {
 	this->nbSelectedPizza = 0;
 	this->nbSlice = 0;
 
-	long long int it = this->nbPizza-1;
-	while (this->slices[it] > this->nbSliceMax) --it;
-	this->nbSlice += this->slices[it];
-	this->selected[it] = true;
+	for (long it = this->nbPizza-1; it >= 0; --it) {
+		unsigned long long int nbSliceTmp = 0;
+		bool* selectedTmp = new bool[this->nbPizza];
+		for (long i = 0; i < this->nbPizza; i += 1) {
+			selectedTmp[i] = false;
+		}
 
-	for (; it >= 0; --it) {
-		for (long long int jt = it-1; jt >= 0; --jt) {
-			if (this->nbSlice + this->slices[jt] < this->nbSliceMax) {
-				this->nbSlice += this->slices[jt];
-				this->selected[jt] = true;
+		for (unsigned int jt = it; jt >= 0; --jt) {
+			if (nbSliceTmp + this->slices[jt] <= this->nbSliceMax) {
+				nbSliceTmp += this->slices[jt];
+				selectedTmp[jt] = true;
 			}
 		}
+
+		if (nbSliceTmp > this->nbSlice) {
+			this->nbSlice = nbSliceTmp;
+			for (unsigned int i = 0; i < this->nbPizza; i += 1) {
+				this->selected[i] = selectedTmp[i];
+			}
+		}
+
+		delete[] selectedTmp;
+
+		if (this->nbSlice == this->nbSliceMax) break;
 	}
 
-	for (unsigned int i = 0; i <this->nbPizza; i += 1) {
+	for (unsigned int i = 0; i < this->nbPizza; i += 1) {
 		if (this->selected[i]) {
 			this->nbSelectedPizza += 1;
 		}
