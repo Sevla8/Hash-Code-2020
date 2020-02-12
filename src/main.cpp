@@ -41,6 +41,8 @@ int main(int argc, const char** argv) {
 
 	hashcode.calculate();
 
+	std::cout << hashcode.getNbSlice() << std::endl;
+
 	outputFile << hashcode;
 
 	return 0;
