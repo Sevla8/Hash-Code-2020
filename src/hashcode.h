@@ -11,6 +11,7 @@ class Hashcode {
 		~Hashcode();
 		void calculate();
 		void calculate(unsigned int&, bool*&);
+		const unsigned int getNbSlice() const;
 	private:
 		// input
 			unsigned int nbSliceMax;
