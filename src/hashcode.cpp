@@ -36,6 +36,10 @@ void Hashcode::calculate() {
 	}
 }
 
+const unsigned int Hashcode::getNbSlice() const {
+	return this->nbSlice;
+}
+
 std::istream& operator>>(std::istream& is, Hashcode& ha) {
 	is >> ha.nbSliceMax;
 	is >> ha.nbPizza;

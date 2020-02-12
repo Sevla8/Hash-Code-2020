@@ -10,6 +10,7 @@ class Hashcode {
 		Hashcode();
 		~Hashcode();
 		void calculate();
+		const unsigned int getNbSlice() const;
 	private:
 		// input
 			unsigned long long int nbSliceMax;
