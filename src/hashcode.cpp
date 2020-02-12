@@ -27,6 +27,7 @@ void Hashcode::calculate() {
 
 		delete[] selectedTmp;
 
+		if (this->nbSlice == this->nbSliceMax) break;
 	}
 
 	for (unsigned int i = 0; i < this->nbPizza; i += 1) {
@@ -57,6 +58,7 @@ void Hashcode::calculate(unsigned int& nbSliceTmp, bool*& selectedTmp) {
 
 				delete[] selectedTmp2;
 
+				if (this->nbSlice == this->nbSliceMax) break;
 			}
 		}
 	}
