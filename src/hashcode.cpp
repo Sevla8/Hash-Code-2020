@@ -28,7 +28,7 @@ void Hashcode::calculate() {
 	}
 }
 
-const unsigned int Hashcode::getNbSlices() const {
+const unsigned int Hashcode::getNbSlice() const {
 	return this->nbSlice;
 }
 
