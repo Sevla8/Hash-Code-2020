@@ -4,6 +4,7 @@
 #include <istream>
 #include <fstream>
 #include <iostream>
+#include <vector>
 
 class Hashcode {
 	public:
