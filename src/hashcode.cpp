@@ -8,30 +8,38 @@ void Hashcode::calculate() {
 	this->nbSelectedPizza = 0;
 	this->nbSlice = 0;
 
-	for (long it = this->nbPizza-1; it >= 0; --it) {
+	long int index = this->nbPizza;
+	unsigned long long int tmpNbSlice = 0;
+	std::vector<unsigned int> tmpSlicesIndex;
 
-		for (long jt = it; jt >= 0; --jt) {
-			if (this->nbSlice + this->slices[jt] <= this->nbSliceMax && !this->selected[jt]) {
-				this->nbSlice += this->slices[jt];
-				this->selected[jt] = true;
+	while (index >= 0) {
+		index -= 1;
+
+		for (long long int it = index; it >= 0; --it) {
+			if (tmpNbSlice + this->slices[it] <= this->nbSliceMax && !this->selected[it]) {
+				tmpNbSlice += this->slices[it];
+				tmpSlicesIndex.push_back(it);
+			}
+			if (tmpNbSlice == this->nbSliceMax) {
+				break;
 			}
 		}
-
-		if (this->nbSlice == this->nbSliceMax) break;
-
-		long kt = 0;
-		while (!this->selected[kt] && kt < this->nbPizza-1) ++kt;
-		this->nbSlice -= this->slices[kt];
-		this->selected[kt] = false;
-		long nt = this->nbPizza-1;
-		while (!this->selected[nt] && nt > 0) --kt;
-		this->nbSlice -= this->slices[nt];
-		this->selected[nt] = false;
-	}
-
-	for (unsigned int i = 0; i < this->nbPizza; i += 1) {
-		if (this->selected[i]) {
-			this->nbSelectedPizza += 1;
+		if (this->nbSlice < tmpNbSlice) {
+			this->nbSlice = tmpNbSlice;
+			for (unsigned int i = 0; i < this->nbPizza; i += 1) {
+				this->selected[i] = false;
+			}
+			for (std::vector<unsigned>::iterator jt = tmpSlicesIndex.begin(); jt != tmpSlicesIndex.end(); ++jt) {
+				this->selected[*jt] = true;
+			}
+		}
+		if (this->nbSlice == this->nbSliceMax) {
+			break;
+		}
+		if (tmpSlicesIndex.size() != 0) {
+			index = tmpSlicesIndex[tmpSlicesIndex.size()-1];
+			tmpSlicesIndex.pop_back();
+			tmpNbSlice -= this->slices[index];
 		}
 	}
 }
