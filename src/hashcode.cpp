@@ -42,6 +42,10 @@ void Hashcode::calculate() {
 			tmpNbSlice -= this->slices[index];
 		}
 	}
+
+	for (unsigned int i = 0; i < this->nbPizza; i += 1) {
+		this->nbSelectedPizza += this->selected[i] ? 1 : 0;
+	}
 }
 
 const unsigned int Hashcode::getNbSlice() const {
