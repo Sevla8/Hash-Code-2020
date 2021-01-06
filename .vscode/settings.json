@@ -4,6 +4,7 @@
 		"iostream": "cpp",
 		"iosfwd": "cpp",
 		"fstream": "cpp",
+<<<<<<< HEAD
 		"new": "cpp",
 		"array": "cpp",
 		"atomic": "cpp",
@@ -45,5 +46,8 @@
 		"streambuf": "cpp",
 		"typeinfo": "cpp",
 		"bit": "cpp"
+=======
+		"new": "cpp"
+>>>>>>> a99ff1259a73998ca55020904b022d396daace0a
 	}
 }
