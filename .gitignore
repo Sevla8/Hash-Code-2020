@@ -29,10 +29,14 @@
 # Executables
 *.exe
 <<<<<<< HEAD
+<<<<<<< HEAD
 # *.out
 =======
 *.out
 >>>>>>> a99ff1259a73998ca55020904b022d396daace0a
+=======
+# *.out
+>>>>>>> 940371c28642725a85927faefff25356df235acc
 *.app
 
 # Others
